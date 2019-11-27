@@ -9,7 +9,9 @@ class HomeTest(TestCase):
         """"GET / Must return status code 200 """
         self.assertEqual(200, self.resp.status_code)
 
-
     def test_template(self):
         """"Must use index.html"""
         self.assertTemplateUsed(self.resp, "index.html")
+
+    def test_subscription_link(self):
+        self.assertContains(self.resp, 'href="/inscricao/"')
