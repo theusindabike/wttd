@@ -1,5 +1,5 @@
-/* Customização */
 
+/* Customização */
 @font-face {
     font-family: 'sinkin_sans200_x_light';
     src: url('../fonts/SinkinSans-200XLight-webfont.eot');
@@ -348,5 +348,20 @@ section header h2 {
 
 }
 
+.alert {
+    padding: 0 15px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.alert p {
+    padding: 7px 0 7px;
+}
+
+.alert.success {
+    color: #3c763d;
+    backdrop-color: #dff0d8;
+    border-color: #d0e9c6;
+}
 
 /* Fim Customização */
