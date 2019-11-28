@@ -1,5 +1,6 @@
-# Eventex
+# Eventex [![Build Status](https://travis-ci.org/theusindabike/wttd.svg?branch=master)](https://travis-ci.org/theusindabike/wttd)
 - Python 3.8.0
+
 ## Install
 ```console
 git clone git@github.com:theusindabike/wttd.git wttd
