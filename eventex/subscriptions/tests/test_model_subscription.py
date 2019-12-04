@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.test import TestCase
 
 from eventex.subscriptions.models import Subscription
@@ -17,4 +19,4 @@ class SubscriptionModelTest(TestCase):
         self.assertTrue(Subscription.objects.exists())
 
     def test_created_at(self):
-        pass
+        self.assertIsInstance(self.obj.created_at, datetime)
