@@ -33,8 +33,8 @@ def create(request):
                'Confirmação de inscrição',
                settings.DEFAULT_FROM_EMAIL,
                s.email)
-
-    return HttpResponseRedirect(r('subscriptions:detail', s.pk))
+    request.session['subscription_id'] = s.pk
+    return HttpResponseRedirect(r('subscriptions:detail'))
 
 
 def _send_mail(template_name, context, subject, from_, to):
@@ -42,10 +42,12 @@ def _send_mail(template_name, context, subject, from_, to):
     mail.send_mail(subject, body, from_, [from_, to])
 
 
-def detail(request, pk):
+def detail(request):
     try:
+        pk = request.session['subscription_id']
         s = Subscription.objects.get(pk=pk)
-    except Subscription.DoesNotExist:
+        del request.session['subscription_id']
+    except (Subscription.DoesNotExist, KeyError):
         raise Http404
 
     return render(request, 'subscriptions/subscription_detail.html', {'subscription': s})

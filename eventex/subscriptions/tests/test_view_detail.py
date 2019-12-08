@@ -12,7 +12,11 @@ class SubscriptionDetailGet(TestCase):
             email='email@matheus.com',
             phone='19999999999'
         )
-        self.resp = self.client.get(r('subscriptions:detail', self.s.pk))
+        session = self.client.session
+        session['subscription_id'] = self.s.pk
+        session.save()
+
+        self.resp = self.client.get(r('subscriptions:detail'))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
@@ -31,8 +35,12 @@ class SubscriptionDetailGet(TestCase):
             for expected in contents:
                 self.assertContains(self.resp, expected)
 
+    def test_session_subscription_id_is_deleted_after(self):
+        self.resp = self.client.get(r('subscriptions:detail'))
+        self.assertEqual(404, self.resp.status_code)
+
 
 class SubscriptionDetailNotFound(TestCase):
     def test_not_found(self):
-        resp = self.client.get(r('subscriptions:detail', 0))
+        resp = self.client.get(r('subscriptions:detail'))
         self.assertEqual(404, resp.status_code)
