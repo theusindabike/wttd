@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 	<head>
         <title>Eventex - O maior encontro hacker do mundo!</title>
 
@@ -63,7 +63,11 @@
                 {% for s in speakers %}
                     <div class="desktop-4">
                         <img src="{{ s.photo }}">
-                        <h4>{{ s.name }}</h4>
+                        <h4>
+                            <a href="{{ s.get_absolute_url}}">
+                                {{ s.name }}
+                            </a>
+                        </h4>
                     </div>
                 {% endfor %}
             </div>
